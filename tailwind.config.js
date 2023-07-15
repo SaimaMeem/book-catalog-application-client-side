@@ -1,12 +1,15 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{html,js,ts,jsx,tsx}",
+    "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin.cjs"), require("rippleui")],
 }
 
