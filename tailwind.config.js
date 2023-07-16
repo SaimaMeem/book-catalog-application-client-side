@@ -9,6 +9,13 @@ export default {
   ],
   theme: {
     extend: {},
+    colors: {
+      'text': '#0c270c',
+      'background': '#ffffff',
+      'major': '#378036',
+      'minor': '#cdf0cc',
+      'accent': '#39b937',
+    },
   },
   plugins: [require("tw-elements/dist/plugin.cjs"), require("rippleui")],
 }
