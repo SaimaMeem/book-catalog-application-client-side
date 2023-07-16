@@ -1,13 +1,21 @@
+import { Link } from 'react-router-dom';
+
 export default function Header() {
     return (
         <>
             <div className="navbar rounded-lg navbar-glass font-semibold">
                 <div className="navbar-start">
-                    <a className="navbar-item">Book Catalog Application</a>
+                    <Link to="/" className="navbar-item">
+                        Book Catalog Application
+                    </Link>
                 </div>
                 <div className="navbar-center">
-                    <a className="navbar-item">All Books</a>
-                    <a className="navbar-item">Add New Book</a>
+                    <Link to="/" className="navbar-item">
+                        All Books
+                    </Link>
+                    <Link to="/" className="navbar-item">
+                        Add New Book
+                    </Link>
                 </div>
                 <div className="navbar-end">
                     <div className="avatar avatar-ring avatar-md">
@@ -23,15 +31,24 @@ export default function Header() {
                                     />
                                 </label>
                                 <div className="dropdown-menu dropdown-menu-bottom-left">
-                                    <a className="dropdown-item text-sm">
+                                    <Link
+                                        to="/"
+                                        className="dropdown-item text-sm"
+                                    >
                                         My Wishlist
-                                    </a>
-                                    <a className="dropdown-item text-sm">
+                                    </Link>
+                                    <Link
+                                        to="/"
+                                        className="dropdown-item text-sm"
+                                    >
                                         My Reading List
-                                    </a>
-                                    <a className="dropdown-item text-sm">
+                                    </Link>
+                                    <Link
+                                        to="/"
+                                        className="dropdown-item text-sm"
+                                    >
                                         Log Out
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
