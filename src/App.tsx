@@ -1,4 +1,4 @@
-import AllBooks from './components/AllBooks';
+import AllBooks from './pages/home/books/Books';
 import Footer from './components/shared/Footer';
 import Header from './components/shared/Header';
 
