@@ -1,20 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 export const api = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:5000/api/v1/',
-    }),
-    endpoints: (builder) => ({
-        getBooks: builder.query({
-            query: (args) => {
-                const { sortBy, sortOrder } = args;
-                return {
-                    url: '/books',
-                    params: { sortBy, sortOrder },
-                };
-            },
-        }),
-    }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api/v1/' }),
+    tagTypes: ['books'],
+    endpoints: () => ({}),
 });
-
-export const { useGetBooksQuery } = api;
