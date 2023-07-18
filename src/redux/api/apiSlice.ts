@@ -5,7 +5,15 @@ export const api = createApi({
         baseUrl: 'http://localhost:5000/api/v1/',
     }),
     endpoints: (builder) => ({
-        getBooks: builder.query({ query: () => '/books' }),
+        getBooks: builder.query({
+            query: (args) => {
+                const { sortBy, sortOrder } = args;
+                return {
+                    url: '/books',
+                    params: { sortBy, sortOrder },
+                };
+            },
+        }),
     }),
 });
 
