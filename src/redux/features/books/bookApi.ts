@@ -4,10 +4,10 @@ export const bookApi = api.injectEndpoints({
     endpoints: (builder) => ({
         getBooks: builder.query({
             query: (args) => {
-                const { sortBy, sortOrder } = args;
+                const { limit } = args;
                 return {
                     url: '/books',
-                    params: { sortBy, sortOrder },
+                    params: { limit },
                 };
             },
             providesTags: ['books'],

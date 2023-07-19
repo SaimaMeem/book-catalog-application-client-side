@@ -10,10 +10,10 @@ export default function Header() {
                     </Link>
                 </div>
                 <div className="navbar-center">
-                    <Link to="/" className="navbar-item">
+                    <Link to="/allbooks" className="navbar-item">
                         All Books
                     </Link>
-                    <Link to="/" className="navbar-item">
+                    <Link to="/addnewbook" className="navbar-item">
                         Add New Book
                     </Link>
                 </div>
@@ -32,19 +32,19 @@ export default function Header() {
                                 </label>
                                 <div className="dropdown-menu dropdown-menu-bottom-left">
                                     <Link
-                                        to="/"
+                                        to="/mywishlist"
                                         className="dropdown-item text-sm"
                                     >
                                         My Wishlist
                                     </Link>
                                     <Link
-                                        to="/"
+                                        to="/myreadinglist"
                                         className="dropdown-item text-sm"
                                     >
                                         My Reading List
                                     </Link>
                                     <Link
-                                        to="/"
+                                        to="/logout"
                                         className="dropdown-item text-sm"
                                     >
                                         Log Out
