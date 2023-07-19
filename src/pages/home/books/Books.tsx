@@ -7,7 +7,7 @@ export default function Books() {
     const { data: books, isLoading } = useGetBooksQuery({});
 
     return (
-        <section className="my-14 mx-7" id="available-parts">
+        <section className="my-14 mx-7">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
                 {isLoading ? (
                     <div>loading</div>
