@@ -10,6 +10,7 @@ export default function AllBooks() {
     const { data: books, isLoading } = useGetBooksQuery({
         searchTerm,
         genre,
+        limit: 0,
     });
 
     return (

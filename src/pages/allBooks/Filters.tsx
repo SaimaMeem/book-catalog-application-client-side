@@ -1,10 +1,23 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
+import { IBook } from '../../interfaces/books';
+import { useGetBooksQuery } from '../../redux/features/books/bookApi';
 import { filterByGenre } from '../../redux/features/books/bookSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 export default function Filters() {
-    const selectedValue = useAppSelector((state) => state.book.genre);
+    const { genre } = useAppSelector((state) => state.book);
     const dispatch = useAppDispatch();
+    const { data: books, isLoading } = useGetBooksQuery({
+        limit: 0,
+    });
+    // console.log(books);
+    const uniqueGenres = Array.from(
+        new Set(books?.data.map((book: IBook) => book.genre))
+    )
+        .sort()
+        .map((genre, id) => ({ id, genre }));
+
+    console.log(uniqueGenres);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         console.log(event.target.value);
@@ -54,32 +67,30 @@ export default function Filters() {
                                         id="group1"
                                     >
                                         <div className="min-h-0">
-                                            <label className="flex cursor-pointer gap-2 menu-item ml-1">
-                                                <input
-                                                    type="radio"
-                                                    name="option"
-                                                    value="Fantasy"
-                                                    checked={
-                                                        selectedValue ===
-                                                        'Fantasy'
-                                                    }
-                                                    onChange={handleChange}
-                                                />
-                                                <span>Fantasy</span>
-                                            </label>
-                                            <label className="flex cursor-pointer gap-2 menu-item ml-1">
-                                                <input
-                                                    type="radio"
-                                                    name="option"
-                                                    value="political fiction"
-                                                    checked={
-                                                        selectedValue ===
-                                                        'political fiction'
-                                                    }
-                                                    onChange={handleChange}
-                                                />
-                                                <span>Political Fiction</span>
-                                            </label>
+                                            {uniqueGenres.map((uniqueGenre) => (
+                                                <label
+                                                    key={uniqueGenre?.id}
+                                                    className="flex cursor-pointer gap-2 menu-item ml-1"
+                                                >
+                                                    <input
+                                                        type="radio"
+                                                        name="option"
+                                                        value={
+                                                            uniqueGenre?.genre as string
+                                                        }
+                                                        checked={
+                                                            genre ===
+                                                            uniqueGenre?.genre
+                                                        }
+                                                        onChange={handleChange}
+                                                    />
+                                                    <span>
+                                                        {
+                                                            uniqueGenre.genre as ReactNode
+                                                        }
+                                                    </span>
+                                                </label>
+                                            ))}
                                         </div>
                                     </div>
                                 </li>
