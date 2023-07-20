@@ -8,8 +8,8 @@ export default function Search() {
     };
     return (
         <>
-            <div className="mb-3">
-                <div className="relative mb-4 flex w-full flex-wrap items-stretch">
+            <div className="mb-3 mt-10 flex justify-center">
+                <div className="relative mb-4 flex w-1/2 flex-wrap items-stretch">
                     <input
                         type="search"
                         onChange={handleSearch}
