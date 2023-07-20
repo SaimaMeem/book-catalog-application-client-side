@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 const initialState = {
     searchTerm: '',
+    genre: '',
 };
 const bookSlice = createSlice({
     name: 'book',
@@ -9,8 +10,11 @@ const bookSlice = createSlice({
         searchBook: (state, action: PayloadAction<string>) => {
             state.searchTerm = action.payload;
         },
+        filterByGenre: (state, action: PayloadAction<string>) => {
+            state.genre = action.payload;
+        },
     },
 });
 
-export const { searchBook } = bookSlice.actions;
+export const { searchBook, filterByGenre } = bookSlice.actions;
 export default bookSlice.reducer;
