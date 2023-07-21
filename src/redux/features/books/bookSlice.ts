@@ -1,7 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-const initialState = {
+interface AppState {
+    searchTerm: string;
+    genre: string[];
+    publicationYear: string[];
+}
+const initialState: AppState = {
     searchTerm: '',
-    genre: '',
+    genre: [],
+    publicationYear: [],
 };
 const bookSlice = createSlice({
     name: 'book',
@@ -11,10 +18,30 @@ const bookSlice = createSlice({
             state.searchTerm = action.payload;
         },
         filterByGenre: (state, action: PayloadAction<string>) => {
-            state.genre = action.payload;
+            if (state.genre.includes(action.payload)) {
+                state.genre = state.genre.filter(
+                    (checkedGenres) => checkedGenres !== action.payload
+                );
+            } else {
+                state.genre = [...state.genre, action.payload];
+            }
+        },
+        filterByPublicationYear: (state, action: PayloadAction<string>) => {
+            if (state.publicationYear.includes(action.payload)) {
+                state.publicationYear = state.publicationYear.filter(
+                    (checkedPublicationYears) =>
+                        checkedPublicationYears !== action.payload
+                );
+            } else {
+                state.publicationYear = [
+                    ...state.publicationYear,
+                    action.payload,
+                ];
+            }
         },
     },
 });
 
-export const { searchBook, filterByGenre } = bookSlice.actions;
+export const { searchBook, filterByGenre, filterByPublicationYear } =
+    bookSlice.actions;
 export default bookSlice.reducer;

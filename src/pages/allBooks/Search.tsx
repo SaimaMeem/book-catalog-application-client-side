@@ -9,11 +9,11 @@ export default function Search() {
     return (
         <>
             <div className="mb-3 mt-10 flex justify-center">
-                <div className="relative mb-4 flex w-1/2 flex-wrap items-stretch">
+                <div className="relative mb-4 flex w-1/2 min-w-[400px] flex-wrap items-stretch">
                     <input
                         type="search"
                         onChange={handleSearch}
-                        className="relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-major bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-major focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_#378036] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-major"
+                        className="relative m-0 -mr-0.5 block w-[200px] min-w-1/2 flex-auto rounded-l border border-solid border-major bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-major focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_#378036] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-major"
                         placeholder="Search"
                         aria-label="Search"
                         aria-describedby="button-addon1"
