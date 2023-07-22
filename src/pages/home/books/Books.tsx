@@ -25,7 +25,7 @@ export default function Books() {
                     </div>
                     <div className="flex justify-center my-5 ">
                         <Link
-                            to="/allbooks"
+                            to="/all-books"
                             type="button"
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"

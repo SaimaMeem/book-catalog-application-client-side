@@ -13,10 +13,10 @@ export default function Header() {
                     <Link to="/" className="navbar-item">
                         Home
                     </Link>
-                    <Link to="/allbooks" className="navbar-item">
+                    <Link to="/all-books" className="navbar-item">
                         All Books
                     </Link>
-                    <Link to="/addnewbook" className="navbar-item">
+                    <Link to="/add-new-book" className="navbar-item">
                         Add New Book
                     </Link>
                 </div>
