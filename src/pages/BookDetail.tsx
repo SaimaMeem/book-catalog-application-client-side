@@ -1,19 +1,26 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { BsBookHalf } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Loader from '../components/shared/Loader';
 import {
     useGetSingleBookQuery,
     usePostReviewMutation,
+    useRemoveBookMutation,
 } from '../redux/features/books/bookApi';
 
 export default function BookDetail() {
     const { id } = useParams();
     const { data: book, isLoading } = useGetSingleBookQuery(id);
     const [postReview] = usePostReviewMutation();
+    const [deleteBook] = useRemoveBookMutation();
     const [textArea, setTextArea] = useState<string>('');
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/';
+
     const handleSubmit = (event: FormEvent<HTMLButtonElement>) => {
         event.preventDefault();
         const options = {
@@ -27,9 +34,21 @@ export default function BookDetail() {
     const handleTextArea = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setTextArea(event.target.value);
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const navigateToEditBook = (id: any) => {
         navigate(`/edit-book/${id}`);
+    };
+    const handleDeleteBook = (id: string) => {
+        deleteBook(id)
+            .then((res) => res)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            .then((result: any) => {
+                if (result?.data?.success) {
+                    toast.success('The book has been deleted successfully.');
+                    navigate(from, { replace: true });
+                } else {
+                    toast.error('The deletion of the book has been failed!');
+                }
+            });
     };
     return (
         <>
@@ -78,8 +97,10 @@ export default function BookDetail() {
                                 >
                                     Edit Book
                                 </button>
-                                <Link
-                                    to="/all-books"
+                                <button
+                                    onClick={() =>
+                                        handleDeleteBook(book?.data?._id)
+                                    }
                                     type="button"
                                     data-mdb-ripple="true"
                                     data-mdb-ripple-color="light"
@@ -87,7 +108,7 @@ export default function BookDetail() {
                     hover:outline hover:outline-2 hover:outline-danger-600 hover:text-danger-600"
                                 >
                                     Delete Book
-                                </Link>
+                                </button>
                             </div>
                         </div>
                     </div>
