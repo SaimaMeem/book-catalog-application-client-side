@@ -1,3 +1,4 @@
+import Loader from '../../components/shared/Loader';
 import { IBook } from '../../interfaces/books';
 import { useGetBooksQuery } from '../../redux/features/books/bookApi';
 import { useAppSelector } from '../../redux/hooks';
@@ -23,7 +24,7 @@ export default function AllBooks() {
                 <Search></Search>
                 <div className="flex w-full flex-row flex-wrap justify-center gap-4 p-6">
                     {isLoading ? (
-                        <div className="flex justify-center">loading</div>
+                        <Loader></Loader>
                     ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 lg:gap-6">
                             {books?.data.length > 0 ? (
@@ -31,7 +32,7 @@ export default function AllBooks() {
                                     <Book key={book._id} book={book}></Book>
                                 ))
                             ) : (
-                                <div>No books found</div>
+                                <div>No books found!</div>
                             )}
                         </div>
                     )}
