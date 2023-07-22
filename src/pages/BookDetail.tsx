@@ -97,18 +97,62 @@ export default function BookDetail() {
                                 >
                                     Edit Book
                                 </button>
-                                <button
-                                    onClick={() =>
-                                        handleDeleteBook(book?.data?._id)
-                                    }
-                                    type="button"
+                                <label
                                     data-mdb-ripple="true"
                                     data-mdb-ripple-color="light"
                                     className="flex justify-center items-center rounded px-6 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-background bg-danger-600 shadow-[0_4px_9px_-4px_#D42A46] transition duration-150 ease-in-out hover:bg-background hover:shadow-[0_8px_9px_-4px_#D42A46,0_4px_18px_0_#D42A46)]
                     hover:outline hover:outline-2 hover:outline-danger-600 hover:text-danger-600"
+                                    htmlFor="modal-1"
                                 >
                                     Delete Book
-                                </button>
+                                </label>
+                                <input
+                                    className="modal-state"
+                                    id="modal-1"
+                                    type="checkbox"
+                                />
+                                {/* delete modal */}
+                                <div className="modal">
+                                    <label
+                                        className="modal-overlay"
+                                        htmlFor="modal-1"
+                                    ></label>
+                                    <div className="modal-content flex flex-col gap-5">
+                                        <label
+                                            htmlFor="modal-1"
+                                            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                                        >
+                                            ✕
+                                        </label>
+                                        <h2 className="text-xl font-semibold">
+                                            Delete Confirmation
+                                        </h2>
+                                        <span>
+                                            Are you sure you want to delete{' '}
+                                            <b>{book?.data?.title}</b> book?
+                                        </span>
+                                        <div className="flex gap-3">
+                                            <button
+                                                onClick={() =>
+                                                    handleDeleteBook(
+                                                        book?.data?._id
+                                                    )
+                                                }
+                                                className="btn btn-error btn-block"
+                                            >
+                                                Delete
+                                            </button>
+
+                                            <label
+                                                className="btn btn-block"
+                                                htmlFor="modal-1"
+                                            >
+                                                Cancel
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/* delete modal */}
                             </div>
                         </div>
                     </div>

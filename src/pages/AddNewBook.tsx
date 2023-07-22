@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { FaSave } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { usePostBookMutation } from '../redux/features/books/bookApi';
 type FormData = {
@@ -10,6 +11,7 @@ type FormData = {
     image: string;
 };
 export default function AddNewBook() {
+    const navigate = useNavigate();
     const {
         register,
         formState: { errors },
@@ -34,6 +36,7 @@ export default function AddNewBook() {
                 if (result?.data?.success) {
                     toast.success('A book has been added successfully.');
                     reset();
+                    navigate('/');
                 } else {
                     toast.error('The new Book addition has been failed!');
                 }
