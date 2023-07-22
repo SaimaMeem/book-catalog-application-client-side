@@ -8,7 +8,7 @@ body {
     font-family: 'Lora', serif;
 }
 
-a:hover {
+a:hover.navbar-item {
     color: #378036 !important;
 }
 

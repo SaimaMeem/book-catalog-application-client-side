@@ -16,7 +16,7 @@ export default function AddNewBook() {
         handleSubmit,
         reset,
     } = useForm<FormData>();
-    const [postBook, { isLoading, isSuccess, isError }] = usePostBookMutation();
+    const [postBook, { isLoading }] = usePostBookMutation();
     const onSubmit = async (data: FormData) => {
         const options = {
             bookDetails: {
