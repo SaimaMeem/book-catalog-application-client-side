@@ -32,9 +32,9 @@ export default function Filters() {
         .sort()
         .map((publicationYear, id) => ({ id, publicationYear }));
 
-    const isCheckedGenre = (item: string) => genre.includes(item) && 'checked';
+    const isCheckedGenre = (item: string) => genre.includes(item);
     const isCheckedPublicationYear = (item: string) =>
-        publicationYear.includes(item) && true;
+        publicationYear.includes(item);
 
     const handleGenreFilter = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch(filterByGenre(event.target.value));
@@ -46,11 +46,13 @@ export default function Filters() {
     };
     return (
         <>
-            <aside className="sidebar-sticky sidebar justify-start bg-[#FCFCFC] shadow-[0_4px_15px_-4px_rgba(0,0,0,0.25)] ">
+            <aside className="sidebar-sticky sidebar h-screen justify-start bg-[#FCFCFC] shadow-[8px_0_15px_-4px_rgba(0,0,0,0.2)] ">
                 <section className="sidebar-content min-h-[20rem]">
                     <nav className="menu rounded-md">
                         <section className="menu-section px-4">
-                            <span className="menu-title text-xl">Filters</span>
+                            <span className="menu-title text-xl font-bold">
+                                Filters
+                            </span>
                             <ul className="menu-items">
                                 <li>
                                     <input

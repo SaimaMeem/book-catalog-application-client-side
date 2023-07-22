@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-        <footer className="bg-neutral-200 text-center text-white dark:bg-neutral-600">
+        <footer className="bg-neutral-200 text-center text-white dark:bg-neutral-600 shadow-inner">
             <div className="pt-9">
                 <div className="mb-9 flex justify-center">
                     <a
