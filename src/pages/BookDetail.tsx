@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { BsBookHalf } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Loader from '../components/shared/Loader';
 import {
     useGetSingleBookQuery,
@@ -13,7 +13,7 @@ export default function BookDetail() {
     const { data: book, isLoading } = useGetSingleBookQuery(id);
     const [postReview] = usePostReviewMutation();
     const [textArea, setTextArea] = useState<string>('');
-
+    const navigate = useNavigate();
     const handleSubmit = (event: FormEvent<HTMLButtonElement>) => {
         event.preventDefault();
         const options = {
@@ -27,6 +27,10 @@ export default function BookDetail() {
     const handleTextArea = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setTextArea(event.target.value);
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const navigateToEditBook = (id: any) => {
+        navigate(`/edit-book/${id}`);
+    };
     return (
         <>
             {isLoading ? (
@@ -35,9 +39,9 @@ export default function BookDetail() {
                 </div>
             ) : (
                 <div className="flex flex-col xl:flex-row bg-white md:mx-16 justify-center md:justify-between">
-                    <div className="flex flex-col xl:flex-row">
+                    <div className="flex flex-col xl:flex-row justify-start items-start">
                         <img
-                            className="w-96 md:w-64 sm:w-32 lg:w-96 object-contain xl:object-cover rounded-lg shadow-lg mx-auto"
+                            className="w-96 md:w-64 sm:w-32 lg:w-96 object-contain rounded-lg shadow-lg mx-auto mt-8"
                             src={book?.data?.image}
                             alt=""
                         />
@@ -62,8 +66,10 @@ export default function BookDetail() {
                                 </span>
                             </p>
                             <div className="flex justify-start my-5 space-x-5">
-                                <Link
-                                    to="/all-books"
+                                <button
+                                    onClick={() =>
+                                        navigateToEditBook(book?.data?._id)
+                                    }
                                     type="button"
                                     data-mdb-ripple="true"
                                     data-mdb-ripple-color="light"
@@ -71,7 +77,7 @@ export default function BookDetail() {
                     hover:outline hover:outline-2 hover:outline-warning-600 hover:text-warning-600"
                                 >
                                     Edit Book
-                                </Link>
+                                </button>
                                 <Link
                                     to="/all-books"
                                     type="button"

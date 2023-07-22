@@ -35,7 +35,7 @@ export default function AddNewBook() {
                     toast.success('A book has been added successfully.');
                     reset();
                 } else {
-                    toast.error('The new Book addition is failed!');
+                    toast.error('The new Book addition has been failed!');
                 }
             });
     };
