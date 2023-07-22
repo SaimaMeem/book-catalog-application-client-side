@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
-import Books from '../pages/home/books/Books';
+import NotFound from '../pages/NotFound';
 import AllBooks from '../pages/allBooks/AllBooks';
+import Books from '../pages/home/books/Books';
 
 const routes = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ const routes = createBrowserRouter([
                 path: '/allbooks',
                 element: <AllBooks />,
             },
+            {
+                path: '*',
+                element: <NotFound />,
+            },
         ],
     },
     // {
@@ -25,10 +30,6 @@ const routes = createBrowserRouter([
     // {
     //   path: '/signup',
     //   element: <Signup />,
-    // },
-    // {
-    //   path: '*',
-    //   element: <NotFound />,
     // },
 ]);
 
