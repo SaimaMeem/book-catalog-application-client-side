@@ -6,7 +6,13 @@ import { useGetBooksQuery } from '../../../redux/features/books/bookApi';
 import Book from './Book';
 
 export default function Books() {
-    const { data: books, isLoading } = useGetBooksQuery({});
+    const { data: books, isLoading } = useGetBooksQuery(
+        {},
+        {
+            refetchOnMountOrArgChange: true,
+            pollingInterval: 30000,
+        }
+    );
 
     return (
         <section className="my-14 mx-7">
@@ -14,15 +20,23 @@ export default function Books() {
                 <Loader></Loader>
             ) : (
                 <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-                        {books?.data.length > 0 ? (
-                            books?.data.map((book: IBook) => (
-                                <Book key={book._id} book={book}></Book>
-                            ))
-                        ) : (
-                            <div>No books Available!</div>
-                        )}
-                    </div>
+                    {isLoading ? (
+                        <Loader></Loader>
+                    ) : (
+                        <>
+                            {books?.data.length > 0 ? (
+                                <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 lg:gap-6">
+                                    {books?.data.map((book: IBook) => (
+                                        <Book key={book._id} book={book}></Book>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="flex justify-center">
+                                    No books found!
+                                </div>
+                            )}
+                        </>
+                    )}
                     <div className="flex justify-center my-5 ">
                         <Link
                             to="/all-books"

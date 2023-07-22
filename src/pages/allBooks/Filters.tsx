@@ -13,9 +13,15 @@ export default function Filters() {
     const dispatch = useAppDispatch();
     // console.log(genre, publicationYear);
 
-    const { data: books } = useGetBooksQuery({
-        limit: 0,
-    });
+    const { data: books } = useGetBooksQuery(
+        {
+            limit: 0,
+        },
+        {
+            refetchOnMountOrArgChange: true,
+            pollingInterval: 30000,
+        }
+    );
     const uniqueGenres = Array.from(
         new Set(books?.data.map((book: IBook) => book.genre))
     )
