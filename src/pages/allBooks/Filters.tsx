@@ -30,6 +30,7 @@ export default function Filters() {
         )
     )
         .sort()
+        .reverse()
         .map((publicationYear, id) => ({ id, publicationYear }));
 
     const isCheckedGenre = (item: string) => genre.includes(item);

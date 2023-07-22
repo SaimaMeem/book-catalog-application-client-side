@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FaSave } from 'react-icons/fa';
-
+import { toast } from 'react-toastify';
+import { usePostBookMutation } from '../redux/features/books/bookApi';
 type FormData = {
     title: string;
     author: string;
@@ -15,15 +16,30 @@ export default function AddNewBook() {
         handleSubmit,
         reset,
     } = useForm<FormData>();
-    const onSubmit = handleSubmit((data) => {
-        const bookDetails = {
-            title: data.title,
-            author: data.author,
-            genre: data.genre,
-            publicationDate: data.publicationDate,
-            image: data.image,
+    const [postBook, { isLoading, isSuccess, isError }] = usePostBookMutation();
+    const onSubmit = async (data: FormData) => {
+        const options = {
+            bookDetails: {
+                title: data.title,
+                author: data.author,
+                genre: data.genre,
+                publicationDate: data.publicationDate,
+                image: data.image,
+            },
         };
-    });
+        await postBook(options)
+            .then((res) => res)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            .then((result: any) => {
+                if (result?.data?.success) {
+                    toast.success('A book has been added successfully.');
+                    reset();
+                } else {
+                    toast.error('The new Book addition is failed!');
+                }
+            });
+    };
+
     return (
         <div className="pt-10 pb-24 mx-10">
             <h3 className="flex justify-center leading-tight text-2xl font-bold mb-2">
@@ -33,7 +49,7 @@ export default function AddNewBook() {
 
             <div className="flex flex-col p-6 py-10 rounded-lg shadow-lg  bg-white w-full h-full justify-center mx-auto">
                 {/* <div className="flex w-full border-opacity-100"> */}
-                <form className="" onSubmit={onSubmit}>
+                <form className="" onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="form-group">
                             <div className="form-field">
@@ -136,7 +152,7 @@ export default function AddNewBook() {
                                 </label>
                                 <input
                                     placeholder="Publication Date"
-                                    type="text"
+                                    type="date"
                                     className="input max-w-full border-gray-8"
                                     {...register('publicationDate', {
                                         required: {
@@ -162,10 +178,16 @@ export default function AddNewBook() {
                             type="submit"
                             data-mdb-ripple="true"
                             data-mdb-ripple-color="light"
-                            className="flex justify-center items-center rounded px-6 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-background bg-major shadow-[0_4px_9px_-4px_#14a44d] transition duration-150 ease-in-out hover:bg-background hover:text-major hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)]
-                        hover:outline hover:outline-2 hover:outline-major"
+                            className={`flex justify-center items-center rounded px-6 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-background bg-major shadow-[0_4px_9px_-4px_#14a44d] transition duration-150 ease-in-out hover:bg-background hover:text-major hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)]
+                            hover:outline hover:outline-2 hover:outline-major ${
+                                isLoading && 'btn-loading'
+                            }  `}
                         >
-                            <FaSave /> &nbsp; Save
+                            {!isLoading && (
+                                <>
+                                    <FaSave /> &nbsp; Save
+                                </>
+                            )}
                         </button>
                     </div>
                 </form>

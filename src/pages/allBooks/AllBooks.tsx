@@ -12,12 +12,18 @@ export default function AllBooks() {
     const { searchTerm, genre, publicationYear } = useAppSelector(
         (state) => state.book
     );
-    const { data: books, isLoading } = useGetBooksQuery({
-        searchTerm,
-        genre,
-        publicationYear,
-        limit: 0,
-    });
+    const { data: books, isLoading } = useGetBooksQuery(
+        {
+            searchTerm,
+            genre,
+            publicationYear,
+            limit: 0,
+        },
+        {
+            refetchOnMountOrArgChange: true,
+            pollingInterval: 30000,
+        }
+    );
 
     return (
         <section className="sticky flex h-full  flex-row rounded-lg">
