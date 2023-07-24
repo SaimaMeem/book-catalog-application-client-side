@@ -2,6 +2,18 @@ import { api } from '../../api/apiSlice';
 
 export const bookApi = api.injectEndpoints({
     endpoints: (builder) => ({
+        login: builder.mutation({
+            query: ({ email, password }) => {
+                console.log(email, password);
+
+                return {
+                    url: '/auth/login',
+                    method: 'POST',
+                    body: { email, password },
+                };
+            },
+            // invalidatesTags: ['wishlist'],
+        }),
         addToWishList: builder.mutation({
             query: ({ id, title }) => {
                 return {
@@ -15,4 +27,4 @@ export const bookApi = api.injectEndpoints({
     }),
 });
 
-export const { useAddToWishListMutation } = bookApi;
+export const { useAddToWishListMutation, useLoginMutation } = bookApi;
