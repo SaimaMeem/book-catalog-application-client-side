@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function Header() {
     return (
-        <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white navbar-glass text-sm py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700 shadow-lg">
+        <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white navbar-glass text-md py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700 shadow-lg font-semibold">
             <nav
                 className="relative max-w-7xl w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
                 aria-label="Global"
@@ -14,7 +14,7 @@ export default function Header() {
                     <div className="sm:hidden">
                         <button
                             type="button"
-                            className="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md font-medium bg-white text-gray-700 shadow-md align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-green-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                            className="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-2 rounded-md font-semibold bg-white text-gray-700 shadow-md align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-green-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
                             data-hs-collapse="#navbar-collapse-with-animation"
                             aria-controls="navbar-collapse-with-animation"
                             aria-label="Toggle navigation"
@@ -27,7 +27,7 @@ export default function Header() {
                                 viewBox="0 0 16 16"
                             >
                                 <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
                                 />
                             </svg>
@@ -50,21 +50,21 @@ export default function Header() {
                     <div className="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-center sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:pl-7">
                         <Link
                             to="/"
-                            className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                            className="font-semibold text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
                         >
                             {' '}
                             Home
                         </Link>
                         <Link
                             to="/all-books"
-                            className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                            className="font-semibold text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
                         >
                             {' '}
                             All Books
                         </Link>{' '}
                         <Link
                             to="/add-new-book"
-                            className="font-medium text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                            className="font-semibold text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
                         >
                             {' '}
                             Add New Book
@@ -72,7 +72,7 @@ export default function Header() {
                         <div className="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
                             <button
                                 type="button"
-                                className="flex items-center w-full text-gray-500 hover:text-gray-400 font-medium dark:text-gray-400 dark:hover:text-gray-500 "
+                                className="flex items-center w-full text-gray-500 hover:text-gray-400 font-semibold dark:text-gray-400 dark:hover:text-gray-500 "
                             >
                                 Dropdown
                                 <svg
@@ -86,8 +86,8 @@ export default function Header() {
                                     <path
                                         d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
                                         stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
                                     ></path>
                                 </svg>
                             </button>
@@ -115,7 +115,7 @@ export default function Header() {
                             </div>
                         </div>
                         <a
-                            className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600-l-gray-300 sm:my-6 sm:pl-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
+                            className="flex items-center gap-x-2 font-semibold text-gray-500 hover:text-blue-600-l-gray-300 sm:my-6 sm:pl-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
                             href="#"
                         >
                             <svg

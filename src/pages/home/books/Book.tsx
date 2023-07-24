@@ -48,22 +48,22 @@ export default function Book({ book }: IProps) {
                     <p className="text-xs text-gray-900  font-normal dark:text-neutral-300">
                         Published on {formattedDate}
                     </p>
-                    <div className="flex justify-start my-5 font-semibold ">
+                    <div className="flex justify-start my-5 font-semibold max-w-screen-sm">
                         <div className="dropdown dropdown-hover">
                             <label
                                 className="btn btn-solid-primary my-2"
                                 tabIndex={0}
                             >
-                                <FaRegHeart /> &nbsp; Add to Booklist
+                                <FaRegHeart /> &nbsp; Add
                             </label>
-                            <div className="dropdown-menu bg-background">
+                            <div className="dropdown-menu bg-background left-0 max-w-max">
                                 <Link
                                     to="/my-wish-list"
                                     tabIndex={-1}
                                     className="dropdown-item text-sm"
                                 >
-                                    <label className="flex items-center justify-start">
-                                        <TbJewishStar /> &nbsp;My Wish List
+                                    <label className="flex items-center justify-start mr-6">
+                                        <TbJewishStar /> &nbsp; Wish List
                                     </label>
                                 </Link>
                                 <Link
@@ -71,8 +71,8 @@ export default function Book({ book }: IProps) {
                                     tabIndex={-1}
                                     className="dropdown-item text-sm"
                                 >
-                                    <label className="flex items-center justify-start">
-                                        <AiOutlineRead /> &nbsp;My Reading List
+                                    <label className="flex items-center justify-start mr-6">
+                                        <AiOutlineRead /> &nbsp; Reading List
                                     </label>
                                 </Link>
                             </div>
