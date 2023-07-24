@@ -6,6 +6,7 @@ export default {
     "./index.html",
     "./src/**/*.{html,js,ts,jsx,tsx}",
     "./node_modules/tw-elements/dist/js/**/*.js",
+    'node_modules/preline/dist/*.js',
   ],
   theme: {
     extend: {},
@@ -17,6 +18,11 @@ export default {
       'accent': '#39b937',
     },
   },
-  plugins: [require("tw-elements/dist/plugin.cjs"), require("rippleui")],
+  plugins: [
+    require("tw-elements/dist/plugin.cjs"),
+    require("rippleui"),
+    require('preline/plugin'),
+  ],
+  darkMode: "class"
 }
 

@@ -63,15 +63,14 @@ export default function Filters() {
                     htmlFor="sidebar-mobile-fixed"
                     className="sidebar-overlay"
                 ></label>
-                <div className="w-fit">
+                <div className="absolute right-0 my-4 mr-10">
                     <label
                         htmlFor="sidebar-mobile-fixed"
-                        className="btn-primary btn sm:hidden"
+                        className="rounded-lg bg-major px-3 py-1.5 text-xs font-medium uppercase leading-tight text-background shadow-md transition duration-150 ease-in-out hover:bg-major hover:shadow-lg focus:bg-major focus:shadow-lg focus:outline-none focus:ring-0 active:bg-major active:shadow-lg sm:hidden"
                     >
-                        Open Sidebar
+                        Show Filters
                     </label>
                 </div>
-                {/* <aside className="sidebar sidebar-fixed-left sidebar-mobile h-full justify-start max-sm:fixed max-sm:-translate-x-full bg-[#FCFCFC] shadow-[8px_0_15px_-4px_rgba(0,0,0,0.2)]"></aside> */}
                 <aside className="sidebar sidebar-sticky sidebar-mobile h-full justify-start max-sm:fixed max-sm:-translate-x-full bg-[#FCFCFC] shadow-[8px_0_15px_-4px_rgba(0,0,0,0.2)] w-auto">
                     <section className="sidebar-content min-h-[20rem]">
                         <nav className="menu rounded-md">

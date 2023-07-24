@@ -25,7 +25,7 @@ export default function Books() {
                     ) : (
                         <>
                             {books?.data.length > 0 ? (
-                                <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 lg:gap-6">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 lg:gap-4">
                                     {books?.data.map((book: IBook) => (
                                         <Book key={book._id} book={book}></Book>
                                     ))}
