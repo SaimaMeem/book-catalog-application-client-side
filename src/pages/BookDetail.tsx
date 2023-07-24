@@ -4,7 +4,7 @@ import { BsBookHalf } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import AddToLists from '../components/AddToLists';
+import AddToLists from '../components/shared/AddToLists';
 import Loader from '../components/shared/Loader';
 import {
     useGetSingleBookQuery,

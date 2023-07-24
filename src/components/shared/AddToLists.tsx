@@ -2,8 +2,8 @@
 import { AiOutlineRead } from 'react-icons/ai';
 import { FaRegHeart } from 'react-icons/fa';
 import { TbJewishStar } from 'react-icons/tb';
-import { IBook } from '../interfaces/books';
-import { useAddToWishListMutation } from '../redux/features/user/userApi';
+import { IBook } from '../../interfaces/books';
+import { useAddToWishListMutation } from '../../redux/features/user/userApi';
 
 interface IProps {
     book: IBook;
