@@ -4,6 +4,7 @@ import { BsBookHalf } from 'react-icons/bs';
 import { FaSave } from 'react-icons/fa';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import AddToLists from '../components/AddToLists';
 import Loader from '../components/shared/Loader';
 import {
     useGetSingleBookQuery,
@@ -84,6 +85,12 @@ export default function BookDetail() {
                                     {book?.data?.publicationDate}
                                 </span>
                             </p>
+                            <div>
+                                {' '}
+                                <div className="flex justify-start my-5 font-semibold max-w-screen-sm">
+                                    <AddToLists book={book?.data}></AddToLists>
+                                </div>
+                            </div>
                             <div className="flex justify-start my-5 space-x-5">
                                 <button
                                     onClick={() =>
