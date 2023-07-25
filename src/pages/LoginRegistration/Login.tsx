@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { CgLogIn } from 'react-icons/cg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useLoginMutation } from '../../redux/features/user/userApi';
 
@@ -12,6 +12,8 @@ type FormData = {
 };
 export default function Login() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.path || '/';
     const [errorMessage, setErrorMessage] = useState('');
     const {
         register,
@@ -31,7 +33,7 @@ export default function Login() {
             if (payload) {
                 toast.success('You have Logged in successfully.');
                 reset();
-                navigate('/');
+                navigate(from, { replace: true });
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {

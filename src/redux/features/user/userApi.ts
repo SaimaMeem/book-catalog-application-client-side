@@ -67,11 +67,11 @@ export const bookApi = api.injectEndpoints({
             // invalidatesTags: ['wishlist'],
         }),
         addToWishList: builder.mutation({
-            query: ({ id, title }) => {
+            query: ({ bookInfo }) => {
                 return {
                     url: '/users/add-to-wishlist',
                     method: 'POST',
-                    body: { id, title },
+                    body: { bookInfo },
                 };
             },
             invalidatesTags: ['wishlist'],
