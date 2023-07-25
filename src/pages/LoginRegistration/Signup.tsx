@@ -20,8 +20,6 @@ export default function Signup() {
     } = useForm<FormData>();
     const [signup] = useSignupMutation();
     const onSubmit = async (data: FormData) => {
-        console.log(data);
-
         const options = {
             username: data.username,
             email: data.email,
@@ -32,8 +30,6 @@ export default function Signup() {
             .then((res) => res)
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .then((result: any) => {
-                console.log(result);
-
                 if (result?.data?.success) {
                     toast.success('You have registered successfully.');
                     reset();
@@ -44,7 +40,7 @@ export default function Signup() {
             });
     };
     return (
-        <section className="h-full bg-[#F3F4F6]">
+        <section className="h-screen bg-[#F3F4F6]">
             <div className="dark:bg-slate-900 bg-gray-100 flex h-full items-center py-16">
                 <main className="w-full max-w-md mx-auto p-6 ">
                     <div className="mt-7 bg-white border-4 border-gray-2 rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700 bg-background">

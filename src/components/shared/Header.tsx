@@ -1,6 +1,15 @@
 import { Link } from 'react-router-dom';
+import { removeUserCredential } from '../../redux/features/user/userSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 export default function Header() {
+    const dispatch = useAppDispatch();
+    const { email } = useAppSelector((state) => state.user);
+    console.log(email);
+    const handleLogOut = () => {
+        dispatch(removeUserCredential());
+        localStorage.clear();
+    };
     return (
         <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white navbar-glass text-md py-3 sm:py-0 dark:bg-gray-800 dark:border-gray-700 shadow-lg font-semibold">
             <nav
@@ -62,74 +71,58 @@ export default function Header() {
                             {' '}
                             All Books
                         </Link>{' '}
-                        <Link
-                            to="/add-new-book"
-                            className="font-semibold text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                        >
-                            {' '}
-                            Add New Book
-                        </Link>
+                        {email && (
+                            <Link
+                                to="/add-new-book"
+                                className="font-semibold text-gray-500 hover:text-gray-400 sm:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                            >
+                                {' '}
+                                Add New Book
+                            </Link>
+                        )}
                         <div className="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] sm:py-4">
-                            <button
-                                type="button"
-                                className="flex items-center w-full text-gray-500 hover:text-gray-400 font-semibold dark:text-gray-400 dark:hover:text-gray-500 "
-                            >
-                                Dropdown
-                                <svg
-                                    className="ml-2 w-2.5 h-2.5 text-gray-600"
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 16 16"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
+                            {!email ? (
+                                <Link
+                                    to="/login"
+                                    type="button"
+                                    className="flex items-center w-full text-gray-500 hover:text-gray-400 font-semibold dark:text-gray-400 dark:hover:text-gray-500 "
                                 >
-                                    <path
-                                        d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                    ></path>
-                                </svg>
-                            </button>
+                                    Login
+                                </Link>
+                            ) : (
+                                <button
+                                    type="button"
+                                    className="flex items-center w-full text-gray-500 hover:text-gray-400 font-semibold dark:text-gray-400 dark:hover:text-gray-500 "
+                                >
+                                    {email}
+                                </button>
+                            )}
 
-                            <div className="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] sm:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 sm:w-48 hidden z-10 bg-white sm:shadow-md rounded-lg p-2 dark:bg-gray-800 sm:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full before:-top-5 before:left-0 before:w-full before:h-5 bg-[#FCFCFC]">
-                                <a
-                                    className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                                    href="#"
-                                >
-                                    About
-                                </a>
+                            {email && (
+                                <div className="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] sm:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 sm:w-48 hidden z-10 bg-white sm:shadow-md rounded-lg p-2 dark:bg-gray-800 sm:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full before:-top-5 before:left-0 before:w-full before:h-5 bg-[#FCFCFC]">
+                                    <Link
+                                        to="/my-wishlist"
+                                        className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                                    >
+                                        My Wishlist
+                                    </Link>
 
-                                <a
-                                    className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                                    href="#"
-                                >
-                                    Downloads
-                                </a>
-                                <a
-                                    className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
-                                    href="#"
-                                >
-                                    Team Account
-                                </a>
-                            </div>
+                                    <Link
+                                        to="my-reading-list"
+                                        className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                                    >
+                                        My Reading List
+                                    </Link>
+                                    <Link
+                                        to="/"
+                                        className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                                        onClick={() => handleLogOut()}
+                                    >
+                                        Logout
+                                    </Link>
+                                </div>
+                            )}
                         </div>
-                        <a
-                            className="flex items-center gap-x-2 font-semibold text-gray-500 hover:text-blue-600-l-gray-300 sm:my-6 sm:pl-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
-                            href="#"
-                        >
-                            <svg
-                                className="w-4 h-4"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                fill="currentColor"
-                                viewBox="0 0 16 16"
-                            >
-                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                            </svg>
-                            Log in
-                        </a>
                     </div>
                 </div>
             </nav>

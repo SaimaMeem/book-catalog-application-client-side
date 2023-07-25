@@ -36,7 +36,6 @@ export default function Login() {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             if (error?.status == 401) {
-                console.log(error?.status);
                 setErrorMessage('You have entered a wrong password.');
             } else if (error?.status == 404) {
                 setErrorMessage('You are not a registered user.');
@@ -44,7 +43,7 @@ export default function Login() {
         }
     };
     return (
-        <section className="h-full bg-[#F3F4F6]">
+        <section className="h-screen bg-[#F3F4F6]">
             <div className="dark:bg-slate-900 bg-gray-100 flex h-full items-center py-16">
                 <main className="w-full max-w-md mx-auto p-6 ">
                     <div className="mt-7 bg-white border-4 border-gray-2 rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700 bg-background">
