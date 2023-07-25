@@ -1,43 +1,47 @@
+/* eslint-disable no-unsafe-optional-chaining */
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { CgLogIn } from 'react-icons/cg';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useLoginMutation } from '../../redux/features/user/userApi';
+
 type FormData = {
     email: string;
     password: string;
 };
 export default function Login() {
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('');
     const {
         register,
         formState: { errors },
         handleSubmit,
         reset,
     } = useForm<FormData>();
-    const [login, { isLoading, isSuccess, isError }] = useLoginMutation();
-    const onSubmit = async (data: FormData) => {
-        console.log(data);
 
+    const [login] = useLoginMutation();
+    const onSubmit = async (data: FormData) => {
         const options = {
             email: data.email,
             password: data.password,
         };
-        await login(options)
-            .then((res) => res)
+        try {
+            const payload = await login(options).unwrap();
+            if (payload) {
+                toast.success('You have Logged in successfully.');
+                reset();
+                navigate('/');
+            }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            .then((result: any) => {
-                console.log(result);
-
-                if (result?.data?.success) {
-                    toast.success('You have Logged in successfully.');
-                    // reset();
-                    navigate('/');
-                } else {
-                    toast.error('Your Login attempt has failed!');
-                }
-            });
-        console.log(isLoading, isSuccess, isError);
+        } catch (error: any) {
+            if (error?.status == 401) {
+                console.log(error?.status);
+                setErrorMessage('You have entered a wrong password.');
+            } else if (error?.status == 404) {
+                setErrorMessage('You are not a registered user.');
+            }
+        }
     };
     return (
         <section className="h-full bg-[#F3F4F6]">
@@ -56,7 +60,7 @@ export default function Login() {
                                         to="/register"
                                     >
                                         {' '}
-                                        Sign up here
+                                        Register here
                                     </Link>
                                 </p>
                             </div>
@@ -76,6 +80,9 @@ export default function Login() {
                                                 type="email"
                                                 className="input max-w-full border-gray-8"
                                                 autoComplete="off"
+                                                onFocus={() =>
+                                                    setErrorMessage('')
+                                                }
                                                 {...register('email', {
                                                     required: {
                                                         value: true,
@@ -101,6 +108,9 @@ export default function Login() {
                                                 placeholder="Password"
                                                 type="text"
                                                 className="input max-w-full border-gray-8"
+                                                onFocus={() =>
+                                                    setErrorMessage('')
+                                                }
                                                 {...register('password', {
                                                     required: {
                                                         value: true,
@@ -121,13 +131,19 @@ export default function Login() {
                                                 </label>
                                             )}
                                         </div>
-
+                                        {errorMessage && (
+                                            <label className="form-label">
+                                                <span className="form-label-alt text-red-10 font-bold">
+                                                    {errorMessage}
+                                                </span>
+                                            </label>
+                                        )}
                                         <button
                                             type="submit"
-                                            className={`my-3 py-3 px-4 inline-flex uppercase justify-center items-center gap-2 rounded-md border border-transparent font-bold text-background bg-major shadow-[0_4px_9px_-4px_#14a44d] transition duration-150 ease-in-out hover:bg-background hover:text-major hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)]
+                                            className={`my-3 py-2 px-3 inline-flex uppercase justify-center items-center rounded-md font-bold text-background bg-major shadow-[0_4px_9px_-4px_#14a44d] transition duration-150 ease-in-out hover:bg-background hover:text-major hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)]
                                             hover:outline hover:outline-2 hover:outline-major `}
                                         >
-                                            Sign In <CgLogIn />
+                                            Sign In &nbsp; <CgLogIn />
                                         </button>
                                     </div>
                                 </form>

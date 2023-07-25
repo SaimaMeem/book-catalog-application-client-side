@@ -14,6 +14,16 @@ export const bookApi = api.injectEndpoints({
             },
             // invalidatesTags: ['wishlist'],
         }),
+        signup: builder.mutation({
+            query: ({ username, email, password, confirmPassword }) => {
+                return {
+                    url: '/auth/signup',
+                    method: 'POST',
+                    body: { username, email, password, confirmPassword },
+                };
+            },
+            // invalidatesTags: ['wishlist'],
+        }),
         addToWishList: builder.mutation({
             query: ({ id, title }) => {
                 return {
@@ -27,4 +37,5 @@ export const bookApi = api.injectEndpoints({
     }),
 });
 
-export const { useAddToWishListMutation, useLoginMutation } = bookApi;
+export const { useAddToWishListMutation, useLoginMutation, useSignupMutation } =
+    bookApi;

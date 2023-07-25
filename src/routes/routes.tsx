@@ -8,6 +8,7 @@ import MyWishList from '../pages/MyWishList';
 import NotFound from '../pages/NotFound';
 import AllBooks from '../pages/allBooks/AllBooks';
 import Books from '../pages/home/books/Books';
+import Register from '../pages/LoginRegistration/Signup';
 
 const routes = createBrowserRouter([
     {
@@ -48,10 +49,10 @@ const routes = createBrowserRouter([
         path: '/login',
         element: <Login />,
     },
-    // {
-    //   path: '/signup',
-    //   element: <Signup />,
-    // },
+    {
+        path: '/register',
+        element: <Register />,
+    },
 ]);
 
 export default routes;
