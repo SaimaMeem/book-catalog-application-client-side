@@ -201,7 +201,9 @@ export default function BookDetail() {
                             </button>
                         </div>
                         <div>
-                            <h5 className="font-bold">All Reviews</h5>
+                            {book?.data?.reviews.length > 0 && (
+                                <h5 className="font-bold">All Reviews</h5>
+                            )}
                             <ul className="w-96">
                                 {book?.data?.reviews.length > 0 &&
                                     book?.data?.reviews

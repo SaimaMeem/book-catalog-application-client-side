@@ -3,6 +3,7 @@ import { AiOutlineRead } from 'react-icons/ai';
 import { FaRegHeart } from 'react-icons/fa';
 import { TbJewishStar } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { IBook } from '../../interfaces/books';
 import { useAddToWishListMutation } from '../../redux/features/user/userApi';
 import { useAppSelector } from '../../redux/hooks';
@@ -13,7 +14,7 @@ interface IProps {
 
 export default function AddToLists({ book }: IProps) {
     const { email } = useAppSelector((state) => state.user);
-    const { title: bookTitle, _id: bookId } = book;
+    const { _id: bookId } = book;
 
     const [addToWishList] = useAddToWishListMutation();
     const navigate = useNavigate();
@@ -24,10 +25,22 @@ export default function AddToLists({ book }: IProps) {
             const options = {
                 bookInfo: {
                     bookId,
-                    bookTitle,
                 },
             };
-            addToWishList(options);
+            addToWishList(options)
+                .then((res) => res)
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .then((result: any) => {
+                    if (result?.data?.success) {
+                        toast.success(
+                            'The book has been added to your wishlist successfully.'
+                        );
+                    } else {
+                        toast.error(
+                            'The addition of the book to your wishlist has been failed!'
+                        );
+                    }
+                });
         }
     };
     return (
