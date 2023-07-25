@@ -15,7 +15,6 @@ type FormData = {
 export default function AddNewBook() {
     const { email } = useAppSelector((state) => state.user);
     const { data: user } = useGetMyProfileQuery({ email });
-    console.log(user?.data);
 
     const navigate = useNavigate();
     const {

@@ -11,10 +11,14 @@ import {
     usePostReviewMutation,
     useRemoveBookMutation,
 } from '../redux/features/books/bookApi';
+import { useGetMyProfileQuery } from '../redux/features/user/userApi';
+import { useAppSelector } from '../redux/hooks';
 
 export default function BookDetail() {
     const { id } = useParams();
+    const { email } = useAppSelector((state) => state.user);
     const { data: book, isLoading } = useGetSingleBookQuery(id);
+    const { data: user } = useGetMyProfileQuery({ email });
     const [postReview] = usePostReviewMutation();
     const [deleteBook] = useRemoveBookMutation();
     const [textArea, setTextArea] = useState<string>('');
@@ -91,76 +95,78 @@ export default function BookDetail() {
                                     <AddToLists book={book?.data}></AddToLists>
                                 </div>
                             </div>
-                            <div className="flex justify-start my-5 space-x-5">
-                                <button
-                                    onClick={() =>
-                                        navigateToEditBook(book?.data?._id)
-                                    }
-                                    type="button"
-                                    data-mdb-ripple="true"
-                                    data-mdb-ripple-color="light"
-                                    className="flex justify-center items-center rounded px-6 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-background bg-warning-600 shadow-[0_4px_9px_-4px_rgba(196,138,23,0.9)] transition duration-150 ease-in-out hover:bg-background hover:shadow-[0_8px_9px_-4px_rgba(196,138,23,0.3),0_4px_18px_0_rgba(196,138,23,0.2)]
-                    hover:outline hover:outline-2 hover:outline-warning-600 hover:text-warning-600"
-                                >
-                                    Edit Book
-                                </button>
-                                <label
-                                    data-mdb-ripple="true"
-                                    data-mdb-ripple-color="light"
-                                    className="flex justify-center items-center rounded px-6 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-background bg-danger-600 shadow-[0_4px_9px_-4px_#D42A46] transition duration-150 ease-in-out hover:bg-background hover:shadow-[0_8px_9px_-4px_#D42A46,0_4px_18px_0_#D42A46)]
-                    hover:outline hover:outline-2 hover:outline-danger-600 hover:text-danger-600"
-                                    htmlFor="modal-1"
-                                >
-                                    Delete Book
-                                </label>
-                                <input
-                                    className="modal-state"
-                                    id="modal-1"
-                                    type="checkbox"
-                                />
-                                {/* delete modal */}
-                                <div className="modal">
+                            {book?.data?.user === user?.data?.id && (
+                                <div className="flex justify-start my-5 space-x-5">
+                                    <button
+                                        onClick={() =>
+                                            navigateToEditBook(book?.data?._id)
+                                        }
+                                        type="button"
+                                        data-mdb-ripple="true"
+                                        data-mdb-ripple-color="light"
+                                        className="flex justify-center items-center rounded px-6 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-background bg-warning-600 shadow-[0_4px_9px_-4px_rgba(196,138,23,0.9)] transition duration-150 ease-in-out hover:bg-background hover:shadow-[0_8px_9px_-4px_rgba(196,138,23,0.3),0_4px_18px_0_rgba(196,138,23,0.2)]
+                hover:outline hover:outline-2 hover:outline-warning-600 hover:text-warning-600"
+                                    >
+                                        Edit Book
+                                    </button>
                                     <label
-                                        className="modal-overlay"
+                                        data-mdb-ripple="true"
+                                        data-mdb-ripple-color="light"
+                                        className="flex justify-center items-center rounded px-6 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-background bg-danger-600 shadow-[0_4px_9px_-4px_#D42A46] transition duration-150 ease-in-out hover:bg-background hover:shadow-[0_8px_9px_-4px_#D42A46,0_4px_18px_0_#D42A46)]
+                hover:outline hover:outline-2 hover:outline-danger-600 hover:text-danger-600"
                                         htmlFor="modal-1"
-                                    ></label>
-                                    <div className="modal-content flex flex-col gap-5">
+                                    >
+                                        Delete Book
+                                    </label>
+                                    <input
+                                        className="modal-state"
+                                        id="modal-1"
+                                        type="checkbox"
+                                    />
+                                    {/* delete modal */}
+                                    <div className="modal">
                                         <label
+                                            className="modal-overlay"
                                             htmlFor="modal-1"
-                                            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-                                        >
-                                            ✕
-                                        </label>
-                                        <h2 className="text-xl font-semibold">
-                                            Delete Confirmation
-                                        </h2>
-                                        <span>
-                                            Are you sure you want to delete{' '}
-                                            <b>{book?.data?.title}</b> book?
-                                        </span>
-                                        <div className="flex gap-3">
-                                            <button
-                                                onClick={() =>
-                                                    handleDeleteBook(
-                                                        book?.data?._id
-                                                    )
-                                                }
-                                                className="btn btn-error btn-block"
-                                            >
-                                                Delete
-                                            </button>
-
+                                        ></label>
+                                        <div className="modal-content flex flex-col gap-5">
                                             <label
-                                                className="btn btn-block"
                                                 htmlFor="modal-1"
+                                                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
                                             >
-                                                Cancel
+                                                ✕
                                             </label>
+                                            <h2 className="text-xl font-semibold">
+                                                Delete Confirmation
+                                            </h2>
+                                            <span>
+                                                Are you sure you want to delete{' '}
+                                                <b>{book?.data?.title}</b> book?
+                                            </span>
+                                            <div className="flex gap-3">
+                                                <button
+                                                    onClick={() =>
+                                                        handleDeleteBook(
+                                                            book?.data?._id
+                                                        )
+                                                    }
+                                                    className="btn btn-error btn-block"
+                                                >
+                                                    Delete
+                                                </button>
+
+                                                <label
+                                                    className="btn btn-block"
+                                                    htmlFor="modal-1"
+                                                >
+                                                    Cancel
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
+                                    {/* delete modal */}
                                 </div>
-                                {/* delete modal */}
-                            </div>
+                            )}
                         </div>
                     </div>
                     <div className="p-6 flex-col justify-center md:text-left w-full md:w-96">
