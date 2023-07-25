@@ -76,8 +76,21 @@ export const bookApi = api.injectEndpoints({
             },
             invalidatesTags: ['wishlist'],
         }),
+        getMyProfile: builder.query({
+            query: (args) => {
+                const { email } = args;
+                return {
+                    url: '/users/my-profile',
+                    params: { email },
+                };
+            },
+        }),
     }),
 });
 
-export const { useAddToWishListMutation, useLoginMutation, useSignupMutation } =
-    bookApi;
+export const {
+    useAddToWishListMutation,
+    useLoginMutation,
+    useSignupMutation,
+    useGetMyProfileQuery,
+} = bookApi;

@@ -3,6 +3,8 @@ import { FaSave } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { usePostBookMutation } from '../redux/features/books/bookApi';
+import { useGetMyProfileQuery } from '../redux/features/user/userApi';
+import { useAppSelector } from '../redux/hooks';
 type FormData = {
     title: string;
     author: string;
@@ -11,6 +13,10 @@ type FormData = {
     image: string;
 };
 export default function AddNewBook() {
+    const { email } = useAppSelector((state) => state.user);
+    const { data: user } = useGetMyProfileQuery({ email });
+    console.log(user?.data);
+
     const navigate = useNavigate();
     const {
         register,
@@ -27,6 +33,7 @@ export default function AddNewBook() {
                 genre: data.genre,
                 publicationDate: data.publicationDate,
                 image: data.image,
+                user: user?.data?._id,
             },
         };
         await postBook(options)
