@@ -1,16 +1,37 @@
 import { api } from '../../api/apiSlice';
+import { setUserCredential } from './userSlice';
 
 export const bookApi = api.injectEndpoints({
     endpoints: (builder) => ({
         login: builder.mutation({
             query: ({ email, password }) => {
-                console.log(email, password);
-
                 return {
                     url: '/auth/login',
                     method: 'POST',
                     body: { email, password },
                 };
+            },
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+
+                    localStorage.setItem(
+                        'user',
+                        JSON.stringify({
+                            email: arg?.email,
+                            accessToken: result?.data?.data?.accessToken,
+                        })
+                    );
+
+                    dispatch(
+                        setUserCredential({
+                            email: arg?.email,
+                            accessToken: result?.data?.data?.accessToken,
+                        })
+                    );
+                } catch (err) {
+                    // empty block
+                }
             },
             // invalidatesTags: ['wishlist'],
         }),
@@ -21,6 +42,27 @@ export const bookApi = api.injectEndpoints({
                     method: 'POST',
                     body: { username, email, password, confirmPassword },
                 };
+            },
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    localStorage.setItem(
+                        'user',
+                        JSON.stringify({
+                            email: arg?.email,
+                            accessToken: result?.data?.data?.accessToken,
+                        })
+                    );
+
+                    dispatch(
+                        setUserCredential({
+                            email: arg?.email,
+                            accessToken: result?.data?.data?.accessToken,
+                        })
+                    );
+                } catch (err) {
+                    // empty block
+                }
             },
             // invalidatesTags: ['wishlist'],
         }),
