@@ -16,7 +16,7 @@ type FormData = {
     image: string;
 };
 export default function EditBook() {
-    const { register, handleSubmit, reset } = useForm<FormData>();
+    const { register, handleSubmit } = useForm<FormData>();
     const { id } = useParams();
     const { data: book, isLoading: singleBookIsLoading } =
         useGetSingleBookQuery(id);
@@ -40,7 +40,7 @@ export default function EditBook() {
             .then((result: any) => {
                 if (result?.data?.success) {
                     toast.success('The book has been updated successfully.');
-                    reset();
+                    // reset();
                 } else {
                     toast.error('The update of the book has been failed!');
                 }

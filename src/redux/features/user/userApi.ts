@@ -84,6 +84,7 @@ export const bookApi = api.injectEndpoints({
                     params: { email },
                 };
             },
+            providesTags: ['wishlist'],
         }),
     }),
 });
