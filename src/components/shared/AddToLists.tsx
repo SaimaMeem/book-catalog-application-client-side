@@ -5,7 +5,10 @@ import { TbJewishStar } from 'react-icons/tb';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IBook } from '../../interfaces/books';
-import { useAddToWishListMutation } from '../../redux/features/user/userApi';
+import {
+    useAddToReadingListMutation,
+    useAddToWishListMutation,
+} from '../../redux/features/user/userApi';
 import { useAppSelector } from '../../redux/hooks';
 
 interface IProps {
@@ -17,6 +20,7 @@ export default function AddToLists({ book }: IProps) {
     const { _id: bookId } = book;
 
     const [addToWishList] = useAddToWishListMutation();
+    const [addToReadingList] = useAddToReadingListMutation();
     const navigate = useNavigate();
     const handleAddToWishList = () => {
         if (!email) {
@@ -43,6 +47,34 @@ export default function AddToLists({ book }: IProps) {
                 });
         }
     };
+    const handleAddToReadingList = () => {
+        if (!email) {
+            navigate('/login');
+        } else {
+            const options = {
+                bookInfo: {
+                    bookId,
+                    status: 'Read Soon',
+                },
+            };
+            addToReadingList(options)
+                .then((res) => res)
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                .then((result: any) => {
+                    console.log(result);
+
+                    if (result?.data?.success) {
+                        toast.success(
+                            'The book has been added to your reading list successfully.'
+                        );
+                    } else {
+                        toast.error(
+                            'The addition of the book to your reading list has been failed!'
+                        );
+                    }
+                });
+        }
+    };
     return (
         <div className="dropdown dropdown-hover">
             <label className="btn btn-solid-primary my-2" tabIndex={0}>
@@ -61,6 +93,7 @@ export default function AddToLists({ book }: IProps) {
                 <li
                     tabIndex={-1}
                     className="dropdown-item text-sm cursor-pointer"
+                    onClick={() => handleAddToReadingList()}
                 >
                     <label className="flex items-center justify-start font-bold mr-6">
                         <AiOutlineRead /> &nbsp; Reading List
