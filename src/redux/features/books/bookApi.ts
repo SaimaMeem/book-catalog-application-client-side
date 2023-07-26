@@ -14,7 +14,12 @@ export const bookApi = api.injectEndpoints({
                     params: { limit, searchTerm, genre, publicationYear },
                 };
             },
-            providesTags: ['addnewbook'],
+            providesTags: [
+                'addnewbook',
+                'wishlist',
+                'readinglist',
+                'deletebook',
+            ],
         }),
         postBook: builder.mutation({
             query: ({ bookDetails }) => ({
@@ -44,6 +49,7 @@ export const bookApi = api.injectEndpoints({
                 url: `/books/${id}`,
                 method: 'DELETE',
             }),
+            invalidatesTags: ['deletebook'],
         }),
     }),
 });

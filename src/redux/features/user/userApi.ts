@@ -78,15 +78,13 @@ export const bookApi = api.injectEndpoints({
         }),
         addToReadingList: builder.mutation({
             query: ({ bookInfo }) => {
-                console.log(bookInfo);
-
                 return {
                     url: '/users/add-to-reading-list',
                     method: 'POST',
                     body: { bookInfo },
                 };
             },
-            invalidatesTags: ['wishlist'],
+            invalidatesTags: ['readinglist'],
         }),
         getMyProfile: builder.query({
             query: (args) => {

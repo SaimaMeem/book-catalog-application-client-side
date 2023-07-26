@@ -61,8 +61,6 @@ export default function AddToLists({ book }: IProps) {
                 .then((res) => res)
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 .then((result: any) => {
-                    console.log(result);
-
                     if (result?.data?.success) {
                         toast.success(
                             'The book has been added to your reading list successfully.'

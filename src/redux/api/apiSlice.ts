@@ -15,6 +15,13 @@ export const api = createApi({
         },
     }),
     refetchOnReconnect: true,
-    tagTypes: ['books', 'addnewbook', 'review', 'wishlist'],
+    tagTypes: [
+        'books',
+        'addnewbook',
+        'review',
+        'wishlist',
+        'readinglist',
+        'deletebook',
+    ],
     endpoints: () => ({}),
 });

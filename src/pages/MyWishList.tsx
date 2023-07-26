@@ -9,8 +9,8 @@ export default function MyWishList() {
     const navigate = useNavigate();
     const { email } = useAppSelector((state) => state.user);
     const { data: user } = useGetMyProfileQuery({ email });
-    const { data: book } = useGetBooksQuery({});
-    const wishlist = book?.data.filter((book: IBook) => {
+    const { data: books } = useGetBooksQuery({ limit: 0 });
+    const wishlist = books?.data.filter((book: IBook) => {
         return user?.data?.wishList?.some((wl: any) => {
             return book._id === wl.bookId;
         });
