@@ -24,3 +24,14 @@ a:hover.navbar-item {
 .modal {
     margin-left: 0 !important;
 }
+
+th,
+td {
+    text-align: center !important;
+}
+
+.readonly-select {
+    pointer-events: none;
+    background-color: #f0f0f0;
+    /* Add any other styles to visually indicate it's readonly */
+}

@@ -5,11 +5,11 @@ import BookDetail from '../pages/BookDetail';
 import EditBook from '../pages/EditBook';
 import Login from '../pages/LoginRegistration/Login';
 import Register from '../pages/LoginRegistration/Signup';
-import MyReadingList from '../pages/MyReadingList';
 import MyWishList from '../pages/MyWishList';
 import NotFound from '../pages/NotFound';
 import AllBooks from '../pages/allBooks/AllBooks';
 import Books from '../pages/home/books/Books';
+import MyReadingList from '../pages/myReadingList/MyReadingList';
 import PrivateRoute from './PrivateRoute';
 
 const routes = createBrowserRouter([

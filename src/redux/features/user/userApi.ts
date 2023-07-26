@@ -33,7 +33,6 @@ export const bookApi = api.injectEndpoints({
                     // empty block
                 }
             },
-            // invalidatesTags: ['wishlist'],
         }),
         signup: builder.mutation({
             query: ({ username, email, password, confirmPassword }) => {
@@ -64,7 +63,6 @@ export const bookApi = api.injectEndpoints({
                     // empty block
                 }
             },
-            // invalidatesTags: ['wishlist'],
         }),
         addToWishList: builder.mutation({
             query: ({ bookInfo }) => {
@@ -94,7 +92,17 @@ export const bookApi = api.injectEndpoints({
                     params: { email },
                 };
             },
-            providesTags: ['wishlist'],
+            providesTags: ['wishlist', 'readinglist'],
+        }),
+        updateReadingListBookStatus: builder.mutation({
+            query: ({ userId, bookInfo }) => {
+                return {
+                    url: `/users/${userId}`,
+                    method: 'PATCH',
+                    body: { bookInfo },
+                };
+            },
+            invalidatesTags: ['readinglist'],
         }),
     }),
 });
@@ -105,4 +113,5 @@ export const {
     useSignupMutation,
     useGetMyProfileQuery,
     useAddToReadingListMutation,
+    useUpdateReadingListBookStatusMutation,
 } = bookApi;

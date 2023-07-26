@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 export default function Header() {
     const dispatch = useAppDispatch();
     const { email } = useAppSelector((state) => state.user);
-    console.log(email);
+    // console.log(email);
     const handleLogOut = () => {
         dispatch(removeUserCredential());
         localStorage.clear();
