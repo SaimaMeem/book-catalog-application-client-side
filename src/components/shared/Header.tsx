@@ -1,10 +1,14 @@
+import { AiFillCaretDown } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useGetMyProfileQuery } from '../../redux/features/user/userApi';
 import { removeUserCredential } from '../../redux/features/user/userSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 export default function Header() {
     const dispatch = useAppDispatch();
     const { email } = useAppSelector((state) => state.user);
+    const { data: user } = useGetMyProfileQuery({ email });
+
     // console.log(email);
     const handleLogOut = () => {
         dispatch(removeUserCredential());
@@ -94,7 +98,8 @@ export default function Header() {
                                     type="button"
                                     className="flex items-center w-full text-gray-500 hover:text-gray-400 font-semibold dark:text-gray-400 dark:hover:text-gray-500 "
                                 >
-                                    {email}
+                                    {user?.data?.username} &nbsp;
+                                    <AiFillCaretDown />
                                 </button>
                             )}
 
