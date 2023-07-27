@@ -28,7 +28,7 @@ export default function MyReadingList() {
                 {' '}
                 My Reading List
             </h3>
-            <h3 className="flex justify-start leading-tight text-md font-medium mb-2">
+            <h3 className="flex justify-start leading-tight text-md font-medium mb-5">
                 You have {readingList?.length} book(s) in your reading list.
             </h3>
 

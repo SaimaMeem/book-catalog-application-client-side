@@ -50,6 +50,9 @@ export default function MyWishList() {
                                     <p className="text-xl mt-1 text-gray-800 dark:text-gray-400">
                                         {book?.author}
                                     </p>
+                                    <p className="text-base font-semibold mt-1 text-major dark:text-gray-400">
+                                        {book?.reviews.length} Reviews
+                                    </p>
                                 </div>
                             </div>
                         </div>
