@@ -95,7 +95,7 @@ export default function BookDetail() {
                                     <AddToLists book={book?.data}></AddToLists>
                                 </div>
                             </div>
-                            {book?.data?.user === user?.data?.id && (
+                            {book?.data?.user._id === user?.data?.id && (
                                 <div className="flex justify-start my-5 space-x-5">
                                     <button
                                         onClick={() =>

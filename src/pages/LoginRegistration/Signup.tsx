@@ -33,7 +33,7 @@ export default function Signup() {
                 if (result?.data?.success) {
                     toast.success('You have registered successfully.');
                     reset();
-                    navigate('/');
+                    navigate('/login');
                 } else {
                     toast.error('Your Registration has failed!');
                 }
